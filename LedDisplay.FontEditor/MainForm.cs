@@ -36,6 +36,11 @@ namespace LedDisplay.FontEditor
             }
         }
 
+        private string GetImageKey(string glyphId)
+        {
+            return char.IsUpper(glyphId[0]) ? $"U{glyphId}" : $"L{glyphId}";
+        }
+
         private void LoadFont(PixelFont font)
         {
             this.glyphListView.Clear();
@@ -43,11 +48,11 @@ namespace LedDisplay.FontEditor
 
             foreach (var glyph in font)
             {
-                this.glyphImages.Images.Add(glyph.Id, GetImage(glyph));
+                this.glyphImages.Images.Add(GetImageKey(glyph.Id), GetImage(glyph));
 
                 var item = new ListViewItem(glyph.Id);
 
-                item.ImageKey = glyph.Id;
+                item.ImageKey = GetImageKey(glyph.Id);
                 item.Tag = glyph;
                 item.Text = glyph.Id;
 
@@ -160,8 +165,8 @@ namespace LedDisplay.FontEditor
                     item.Selected = false;
                 }
 
-                this.glyphImages.Images.Add(glyph.Id, GetImage(glyph));
-                this.glyphListView.Items.Add(new ListViewItem { Text = glyph.Id, Tag = glyph, ImageKey = glyph.Id, Selected = true });
+                this.glyphImages.Images.Add(GetImageKey(glyph.Id), GetImage(glyph));
+                this.glyphListView.Items.Add(new ListViewItem { Text = glyph.Id, Tag = glyph, ImageKey = GetImageKey(glyph.Id), Selected = true });
 
                 this.fontSaved = false;
                 this.UpdateStatus();
@@ -223,7 +228,7 @@ namespace LedDisplay.FontEditor
                 return;
             }
 
-            this.glyphImages.Images[this.glyphImages.Images.IndexOfKey(SelectedGlyph.Id)] = GetImage(SelectedGlyph);
+            this.glyphImages.Images[this.glyphImages.Images.IndexOfKey(GetImageKey(SelectedGlyph.Id))] = GetImage(SelectedGlyph);
             this.glyphListView.Refresh();
 
             fontSaved = false;
