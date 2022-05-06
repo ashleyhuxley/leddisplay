@@ -1,5 +1,4 @@
 ﻿using LedDisplay.Graphics.Font;
-using System.Collections;
 using System.Drawing;
 
 namespace LedDisplay.Graphics.Controller
@@ -76,37 +75,7 @@ namespace LedDisplay.Graphics.Controller
 
         public async Task UpdateDisplay()
         {
-            byte[] data = new byte[105];
-            int ix = 0;
-
-            for (int x = this.Width - 8; x >= 0; x -= 8)
-            {
-                for (int y = this.Height - 1; y >= 0; y--)
-                {
-                    bool[] bits = new bool[8];
-                    for (int i = 0; i < 8; i++)
-                    {
-                        bits[7 - i] = buffer[x + i, y];
-                    }
-
-                    data[ix] = ConvertToByte(new BitArray(bits));
-                    ix++;
-                }
-            }
-
-            await this.driver.SendDataAsync(data);
-        }
-
-        private byte ConvertToByte(BitArray bits)
-        {
-            if (bits.Length != 8)
-            {
-                throw new ArgumentException("There must be 8 bits to convert to a byte", nameof(bits));
-            }
-
-            byte[] bytes = new byte[1];
-            bits.CopyTo(bytes, 0);
-            return bytes[0];
+            await this.driver.SendDataAsync(FrameConverter.ToByteArray(this.buffer));
         }
     }
 }

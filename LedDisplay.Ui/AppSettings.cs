@@ -4,11 +4,11 @@ namespace LedDisplay.Ui
 {
     public class AppSettings : IMqttSettings
     {
-        public string ServerAddress => "";
+        public string ServerAddress => "10.20.10.16";
 
-        public string UserName => "";
+        public string UserName => "mqtt";
 
-        public string Password => "";
+        public string Password => "IllBeInMyBunk2459";
 
         public string Topic => "leddisplay/1/data";
     }

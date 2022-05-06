@@ -28,25 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.displayBox = new System.Windows.Forms.PictureBox();
             this.clearButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.drawTextBox = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.displayBox)).BeginInit();
+            this.loadFontButton = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.animationFrameControl = new LedDisplay.Controls.AnimationFrameControl();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.animationFrameControl)).BeginInit();
             this.SuspendLayout();
-            // 
-            // displayBox
-            // 
-            this.displayBox.Location = new System.Drawing.Point(12, 12);
-            this.displayBox.Name = "displayBox";
-            this.displayBox.Size = new System.Drawing.Size(1450, 88);
-            this.displayBox.TabIndex = 0;
-            this.displayBox.TabStop = false;
-            this.displayBox.Paint += new System.Windows.Forms.PaintEventHandler(this.displayBox_Paint);
-            this.displayBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.displayBox_MouseDown);
-            this.displayBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.displayBox_MouseMove);
             // 
             // clearButton
             // 
@@ -66,7 +57,6 @@
             this.updateButton.TabIndex = 2;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
-            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // groupBox1
             // 
@@ -86,34 +76,62 @@
             this.drawTextBox.TabIndex = 0;
             this.drawTextBox.TextChanged += new System.EventHandler(this.drawTextBox_TextChanged);
             // 
+            // loadFontButton
+            // 
+            this.loadFontButton.Location = new System.Drawing.Point(12, 173);
+            this.loadFontButton.Name = "loadFontButton";
+            this.loadFontButton.Size = new System.Drawing.Size(110, 23);
+            this.loadFontButton.TabIndex = 4;
+            this.loadFontButton.Text = "Load Font...";
+            this.loadFontButton.UseVisualStyleBackColor = true;
+            this.loadFontButton.Click += new System.EventHandler(this.loadFontButton_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            this.openFileDialog.Filter = "Pixel Fonts (*.pix)|*.pix|All Files (*.*)|*.*";
+            this.openFileDialog.Title = "Open Pixel Font";
+            // 
+            // animationFrameControl
+            // 
+            this.animationFrameControl.Frame = null;
+            this.animationFrameControl.Location = new System.Drawing.Point(12, 12);
+            this.animationFrameControl.Name = "animationFrameControl";
+            this.animationFrameControl.PixelSize = 12;
+            this.animationFrameControl.Size = new System.Drawing.Size(1455, 97);
+            this.animationFrameControl.TabIndex = 5;
+            this.animationFrameControl.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1479, 195);
+            this.ClientSize = new System.Drawing.Size(1479, 214);
+            this.Controls.Add(this.animationFrameControl);
+            this.Controls.Add(this.loadFontButton);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.updateButton);
             this.Controls.Add(this.clearButton);
-            this.Controls.Add(this.displayBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LED Display Controller";
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseUp);
-            ((System.ComponentModel.ISupportInitialize)(this.displayBox)).EndInit();
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.animationFrameControl)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private PictureBox displayBox;
         private Button clearButton;
         private Button updateButton;
         private GroupBox groupBox1;
         private TextBox drawTextBox;
+        private Button loadFontButton;
+        private OpenFileDialog openFileDialog;
+        private Controls.AnimationFrameControl animationFrameControl;
     }
 }
