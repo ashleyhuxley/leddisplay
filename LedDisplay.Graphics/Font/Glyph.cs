@@ -5,7 +5,13 @@ namespace LedDisplay.Graphics.Font
     [Serializable]
     public class Glyph
     {
-        protected bool[,] data;
+        private bool[,] data;
+
+        public bool[,] Data
+        {
+            get => this.data;
+            set => this.data = value;
+        }
 
         public int Width => data.GetLength(0);
 

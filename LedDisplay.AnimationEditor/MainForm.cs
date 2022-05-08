@@ -50,5 +50,24 @@ namespace LedDisplay.AnimationEditor
         {
             this.animationFrameControl.Frame = this.ActiveFrame;
         }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.animation = Animation.Load(openFileDialog.FileName);
+            }
+
+            this.frameIndex = 0;
+            this.animationFrameControl.Frame = this.ActiveFrame;
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            if (this.saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.animation.Save(saveFileDialog.FileName);
+            }
+        }
     }
 }

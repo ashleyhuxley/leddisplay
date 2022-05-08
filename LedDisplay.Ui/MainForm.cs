@@ -11,6 +11,8 @@ namespace LedDisplay.Ui
 
         private PixelFont font;
 
+        private Display display;
+
         private const int pixelSize = 12;
 
         private bool currentDrawVal = false;
@@ -21,6 +23,7 @@ namespace LedDisplay.Ui
 
             var settings = new AppSettings();
             var driver = new MqttDriver(settings);
+            display = new Display(driver);
 
             this.frame = new AnimationFrame();
             this.font = PixelFont.CreateDefault();
@@ -28,40 +31,41 @@ namespace LedDisplay.Ui
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-
+            this.frame.Clear();
+            this.animationFrameControl.Refresh();
         }
-
-
 
         private async void drawTextBox_TextChanged(object sender, EventArgs e)
         {
-            //Glyph? lastIcon = null;
+            this.frame.Clear();
 
-            //int x = 0;
-            //foreach (var c in drawTextBox.Text)
-            //{
-            //    var icon = this.font[c.ToString()];
-            //    if (icon != null)
-            //    {
-            //        if (lastIcon != null)
-            //        {
-            //            x -= PixelFont.GetKerningOffset(lastIcon, icon);
-            //        }
+            Glyph? lastIcon = null;
 
-            //        if (x >= frame.Width)
-            //        {
-            //            return;
-            //        }
+            int x = 0;
+            foreach (var c in drawTextBox.Text)
+            {
+                var icon = this.font[c.ToString()];
+                if (icon != null)
+                {
+                    if (lastIcon != null)
+                    {
+                        x -= PixelFont.GetKerningOffset(lastIcon, icon);
+                    }
 
-            //        frame.DrawGlyph(icon, new Point(x, 0), true);
-            //        x += icon.Width + 1;
+                    if (x >= frame.Width)
+                    {
+                        return;
+                    }
 
-            //        lastIcon = icon;
-            //    }
-            //}
+                    frame.DrawGlyph(icon, new Point(x, 0), true);
+                    x += icon.Width + 1;
 
-            //displayBox.Refresh();
-            //await frame.UpdateDisplay();
+                    lastIcon = icon;
+                }
+            }
+
+            animationFrameControl.Refresh();
+            await display.DisplayFrame(this.frame);
         }
 
         private void loadFontButton_Click(object sender, EventArgs e)

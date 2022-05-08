@@ -1,7 +1,11 @@
 ﻿using System.Collections;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace LedDisplay.Graphics
 {
+    [Serializable]
     public class Animation : IList<AnimationFrame>
     {
         private List<AnimationFrame> frames;
@@ -73,5 +77,29 @@ namespace LedDisplay.Graphics
         {
             return frames.GetEnumerator();
         }
+
+        public void Save(string filename)
+        {
+            using (var stream = File.Create(filename))
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(stream, this);
+                stream.Close();
+            }
+        }
+
+        public static Animation Load(string filename)
+        {
+            using (var stream = File.OpenRead(filename))
+            {
+                var formatter = new BinaryFormatter();
+                var result = (Animation)formatter.Deserialize(stream);
+                stream.Close();
+
+                return result;
+            }
+        }
+
+
     }
 }
