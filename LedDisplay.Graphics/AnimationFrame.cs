@@ -58,6 +58,19 @@ namespace LedDisplay.Graphics
             return Convert.ToBase64String(this.data);
         }
 
+        public void CopyFrom(byte[] data)
+        {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                this.data[i] = data[i];
+            }
+        }
+
         public void DrawGlyph(Glyph g, Point point, bool transparent)
         {
             if (point.X < 0 || point.Y < 0 || point.X >= this.Width || point.Y >= this.Height)

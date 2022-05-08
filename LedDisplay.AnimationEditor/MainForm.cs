@@ -28,27 +28,42 @@ namespace LedDisplay.AnimationEditor
             animation.Add(new AnimationFrame());
         }
 
+        private void UpdateTitle()
+        {
+            this.Text = $"Animation Editor - [{this.FrameIndex + 1} of {this.animation.Count}]";
+        }
+
         private void prevButton_Click(object sender, EventArgs e)
         {
             if (FrameIndex > 0)
             {
                 this.FrameIndex--;
             }
+
+            UpdateTitle();
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
             if(this.FrameIndex == this.animation.Count - 1)
             {
-                this.animation.Add(new AnimationFrame());
+                var frame = new AnimationFrame();
+                if (copyFrameControl.Checked)
+                {
+                    frame.CopyFrom(this.ActiveFrame.Data);
+                }
+
+                this.animation.Add(frame);
             }
 
             this.FrameIndex++;
+            UpdateTitle();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.animationFrameControl.Frame = this.ActiveFrame;
+            UpdateTitle();
         }
 
         private void loadButton_Click(object sender, EventArgs e)

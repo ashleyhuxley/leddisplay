@@ -35,6 +35,7 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.loadButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
+            this.copyFrameControl = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrameControl)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,11 +101,22 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
+            // copyFrameControl
+            // 
+            this.copyFrameControl.AutoSize = true;
+            this.copyFrameControl.Location = new System.Drawing.Point(288, 117);
+            this.copyFrameControl.Name = "copyFrameControl";
+            this.copyFrameControl.Size = new System.Drawing.Size(172, 19);
+            this.copyFrameControl.TabIndex = 6;
+            this.copyFrameControl.Text = "Copy last frame on creation";
+            this.copyFrameControl.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1470, 179);
+            this.Controls.Add(this.copyFrameControl);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.animationFrameControl);
@@ -115,6 +127,7 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.animationFrameControl)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -126,5 +139,6 @@
         private SaveFileDialog saveFileDialog;
         private Button loadButton;
         private Button saveButton;
+        private CheckBox copyFrameControl;
     }
 }
