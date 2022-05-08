@@ -13,9 +13,9 @@ namespace LedDisplay.Ui
 
         private Display display;
 
-        private const int pixelSize = 12;
+        private Animation? animation;
 
-        private bool currentDrawVal = false;
+        private int frameIndex = 0;
 
         public MainForm()
         {
@@ -79,6 +79,31 @@ namespace LedDisplay.Ui
         private void MainForm_Load(object sender, EventArgs e)
         {
             this.animationFrameControl.Frame = this.frame;
+        }
+
+        private void playAnimationButton_Click(object sender, EventArgs e)
+        {
+            if (openAnimationDialog.ShowDialog() == DialogResult.OK)
+            {
+                this.animation = Animation.Load(openAnimationDialog.FileName);
+                this.animationTimer.Interval = this.animation.FrameDelay;
+            }
+        }
+
+        private async void animationTimer_Tick(object sender, EventArgs e)
+        {
+            if (this.animation == null)
+            {
+                return;
+            }
+
+            await this.display.DisplayFrame(this.animation[frameIndex]);
+
+            this.frameIndex++;
+            if (this.frameIndex == this.animation.Count)
+            {
+                this.frameIndex = 0;
+            }
         }
     }
 }

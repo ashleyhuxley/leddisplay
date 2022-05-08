@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.clearButton = new System.Windows.Forms.Button();
             this.updateButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -35,6 +36,9 @@
             this.loadFontButton = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.animationFrameControl = new LedDisplay.Controls.AnimationFrameControl();
+            this.playAnimationButton = new System.Windows.Forms.Button();
+            this.openAnimationDialog = new System.Windows.Forms.OpenFileDialog();
+            this.animationTimer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrameControl)).BeginInit();
             this.SuspendLayout();
@@ -88,7 +92,6 @@
             // 
             // openFileDialog
             // 
-            this.openFileDialog.FileName = "openFileDialog1";
             this.openFileDialog.Filter = "Pixel Fonts (*.pix)|*.pix|All Files (*.*)|*.*";
             this.openFileDialog.Title = "Open Pixel Font";
             // 
@@ -102,11 +105,32 @@
             this.animationFrameControl.TabIndex = 5;
             this.animationFrameControl.TabStop = false;
             // 
+            // playAnimationButton
+            // 
+            this.playAnimationButton.Location = new System.Drawing.Point(548, 115);
+            this.playAnimationButton.Name = "playAnimationButton";
+            this.playAnimationButton.Size = new System.Drawing.Size(110, 23);
+            this.playAnimationButton.TabIndex = 6;
+            this.playAnimationButton.Text = "Play Animation";
+            this.playAnimationButton.UseVisualStyleBackColor = true;
+            this.playAnimationButton.Click += new System.EventHandler(this.playAnimationButton_Click);
+            // 
+            // openAnimationDialog
+            // 
+            this.openAnimationDialog.Filter = "Animations (*.ani)|*.ani|All Files (*.*)|*.*";
+            this.openAnimationDialog.Title = "Open Animation";
+            // 
+            // animationTimer
+            // 
+            this.animationTimer.Enabled = true;
+            this.animationTimer.Tick += new System.EventHandler(this.animationTimer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1479, 214);
+            this.Controls.Add(this.playAnimationButton);
             this.Controls.Add(this.animationFrameControl);
             this.Controls.Add(this.loadFontButton);
             this.Controls.Add(this.groupBox1);
@@ -133,5 +157,8 @@
         private Button loadFontButton;
         private OpenFileDialog openFileDialog;
         private Controls.AnimationFrameControl animationFrameControl;
+        private Button playAnimationButton;
+        private OpenFileDialog openAnimationDialog;
+        private System.Windows.Forms.Timer animationTimer;
     }
 }

@@ -36,7 +36,9 @@
             this.loadButton = new System.Windows.Forms.Button();
             this.saveButton = new System.Windows.Forms.Button();
             this.copyFrameControl = new System.Windows.Forms.CheckBox();
+            this.frameDelayInput = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.animationFrameControl)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameDelayInput)).BeginInit();
             this.SuspendLayout();
             // 
             // prevButton
@@ -73,12 +75,12 @@
             // 
             // openFileDialog
             // 
-            this.openFileDialog.Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*";
+            this.openFileDialog.Filter = "Animations (*.ani)|*.ani|All Files (*.*)|*.*";
             this.openFileDialog.Title = "Load Animation";
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.Filter = "Json Files (*.json)|*.json|All Files (*.*)|*.*";
+            this.saveFileDialog.Filter = "Animations (*.ani)|*.ani|All Files (*.*)|*.*";
             this.saveFileDialog.Title = "Save Animation";
             // 
             // loadButton
@@ -111,11 +113,25 @@
             this.copyFrameControl.Text = "Copy last frame on creation";
             this.copyFrameControl.UseVisualStyleBackColor = true;
             // 
+            // frameDelayInput
+            // 
+            this.frameDelayInput.Location = new System.Drawing.Point(288, 143);
+            this.frameDelayInput.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.frameDelayInput.Name = "frameDelayInput";
+            this.frameDelayInput.Size = new System.Drawing.Size(172, 23);
+            this.frameDelayInput.TabIndex = 7;
+            this.frameDelayInput.ValueChanged += new System.EventHandler(this.frameDelayInput_ValueChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1470, 179);
+            this.Controls.Add(this.frameDelayInput);
             this.Controls.Add(this.copyFrameControl);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.loadButton);
@@ -126,6 +142,7 @@
             this.Text = "Animation Editor";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.animationFrameControl)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.frameDelayInput)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,5 +157,6 @@
         private Button loadButton;
         private Button saveButton;
         private CheckBox copyFrameControl;
+        private NumericUpDown frameDelayInput;
     }
 }

@@ -25,6 +25,8 @@ namespace LedDisplay.AnimationEditor
             InitializeComponent();
 
             this.animation = new Animation();
+            this.frameDelayInput.Value = animation.FrameDelay;
+
             animation.Add(new AnimationFrame());
         }
 
@@ -83,6 +85,11 @@ namespace LedDisplay.AnimationEditor
             {
                 this.animation.Save(saveFileDialog.FileName);
             }
+        }
+
+        private void frameDelayInput_ValueChanged(object sender, EventArgs e)
+        {
+            this.animation.FrameDelay = Convert.ToInt32(frameDelayInput.Value);
         }
     }
 }
