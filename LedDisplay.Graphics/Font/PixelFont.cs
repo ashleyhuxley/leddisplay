@@ -2,7 +2,7 @@
 using System.Runtime.Serialization.Formatters.Binary;
 
 namespace LedDisplay.Graphics.Font
-{
+{ 
     [Serializable]
     public class PixelFont : IEnumerable<Glyph>
     {
@@ -43,6 +43,8 @@ namespace LedDisplay.Graphics.Font
                     if (g1[j, i])
                     {
                         max[i] = Math.Max(j, max[i]);
+
+                        // Push out a pixel above and below so diagonally adjacent pixels don't clash
                         if (i < 6) max[i + 1] = j;
                         if (i > 0) max[i - 1] = Math.Max(j, max[i - 1]);
                     }
@@ -95,23 +97,23 @@ namespace LedDisplay.Graphics.Font
                  new byte[] { 0,0 },                          // space       ASCII 32
                  new byte[] { 253 },                               // !           ASCII 33
                  new byte[] { 96,0,96 },                           // "           ASCII 34
-                 new byte[] { 20,127,20,127,20},                   // #           ASCII 35
-                 new byte[] { 36,42,127,42,18},                    // $           ASCII 36
-                 new byte[] { 17,2,4,8,17},                        // %           ASCII 37
-                 new byte[] { 54,73,85,34,5},                      // &           ASCII 38
+                 new byte[] { 20,127,20,127,20 },                  // #           ASCII 35
+                 new byte[] { 18,42,127,42,36 },                   // $           ASCII 36
+                 new byte[] { 17,2,4,8,17 },                       // %           ASCII 37
+                 new byte[] { 54,73,85,34,5 },                     // &           ASCII 38
                  new byte[] { 104,112 },                           // '           ASCII 39
                  new byte[] { 28,34,65 },                          // (           ASCII 40
                  new byte[] { 65,34,28 },                          // )           ASCII 41
-                 new byte[] { 20,8,62,8,20},                       // *           ASCII 42
-                 new byte[] { 8,8,62,8,8},                         // +           ASCII 43
-                 new byte[] {  5,6 },                              // ,           ASCII 44
-                 new byte[] { 8,8,8,8,8},                          // -           ASCII 45
+                 new byte[] { 20,8,62,8,20 },                      // *           ASCII 42
+                 new byte[] { 8,8,62,8,8 },                        // +           ASCII 43
+                 new byte[] { 5,6 },                               // ,           ASCII 44
+                 new byte[] { 8,8,8,8,8 },                         // -           ASCII 45
                  new byte[] { 1 },                                 // .           ASCII 46
-                 new byte[] { 1,2,4,8,16},                         // /           ASCII 47
-                 new byte[] { 62,69,73,81,62},                     // 0           ASCII 48
-                 new byte[] { 0,33,127,1,0},                       // 1           ASCII 49
-                 new byte[] { 33,67,69,73,49},                     // 2           ASCII 50
-                 new byte[] { 66,65,81,105,70},                    // 3           ASCII 51
+                 new byte[] { 1,2,4,8,16 },                        // /           ASCII 47
+                 new byte[] { 62,69,73,81,62 },                    // 0           ASCII 48
+                 new byte[] { 0,33,127,1,0 },                      // 1           ASCII 49
+                 new byte[] { 33,67,69,73,49 },                    // 2           ASCII 50
+                 new byte[] { 66,65,81,105,70 },                   // 3           ASCII 51
                  new byte[] { 12,20,36,127,4},                     // 4           ASCII 52
                  new byte[] { 113,81,81,81,78},                    // 5           ASCII 53
                  new byte[] { 30,41,73,73,6},                      // 6           ASCII 54
@@ -213,8 +215,7 @@ namespace LedDisplay.Graphics.Font
                 throw new InvalidOperationException($"Cannot remove item with ID: {id} - Does not exist");
             }
 
-            var glyph = this[id];
-            this.glyphs.Remove(glyph);
+            this.glyphs.Remove(this[id]);
         }
 
         public IEnumerator<Glyph> GetEnumerator()

@@ -51,6 +51,8 @@
             this.glyphDrawBox = new System.Windows.Forms.PictureBox();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.statusBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -79,6 +81,8 @@
             this.openFontToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
+            this.toolStripMenuItem3,
+            this.exportToolStripMenuItem,
             this.toolStripMenuItem2,
             this.exitToolStripMenuItem});
             this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
@@ -214,7 +218,6 @@
             // 
             // glyphListView
             // 
-            this.glyphListView.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.glyphListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.glyphListView.LargeImageList = this.glyphImages;
             this.glyphListView.Location = new System.Drawing.Point(0, 0);
@@ -257,6 +260,18 @@
             this.openFileDialog.FileName = "openFileDialog";
             this.openFileDialog.Filter = "Pixel Fonts (*.pix)|*.pix|All Files (*.*)|*.*";
             this.openFileDialog.Title = "Open Pixel Font";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(179, 6);
+            // 
+            // exportToolStripMenuItem
+            // 
+            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exportToolStripMenuItem.Text = "Export...";
+            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -310,5 +325,7 @@
         private OpenFileDialog openFileDialog;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ToolStripStatusLabel statusText;
+        private ToolStripSeparator toolStripMenuItem3;
+        private ToolStripMenuItem exportToolStripMenuItem;
     }
 }

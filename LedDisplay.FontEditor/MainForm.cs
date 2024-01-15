@@ -373,7 +373,6 @@ namespace LedDisplay.FontEditor
             if (!CheckFontSaved())
             {
                 e.Cancel = true;
-                return;
             }
         }
 
@@ -396,6 +395,82 @@ namespace LedDisplay.FontEditor
         private void glyphDrawBox_MouseUp(object sender, MouseEventArgs e)
         {
             SaveGlyph();
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var sfd = new SaveFileDialog
+            {
+                Filter = "Text Files (*.txt)|*.txt|All Files (*.*)|*.*",
+                Title = "Export font as array"
+            };
+
+            if (sfd.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            var sb = new StringBuilder();
+
+            // Widths
+            sb.Append("char widths[] = {");
+            for (char i = (char)32; i < 127; i++)
+            {
+                if (this.font.ContainsKey(i.ToString()))
+                {
+                    sb.Append(this.font[i.ToString()].Width + ", ");
+                }
+                else
+                {
+                    sb.Append("0, ");
+                }
+            }
+            sb.AppendLine(" };");
+
+            // Chars
+            sb.AppendLine("byte font[][5] = {");
+
+            for (char i = (char)32; i < 127; i++)
+            {
+                if (this.font.ContainsKey(i.ToString()))
+                {
+                    sb.Append("{");
+                    var g = font[i.ToString()];
+                    for (var x = 0; x < 5; x++)
+                    {
+                        if (x < g.Width)
+                        {
+                            int total = 0;
+                            for (var y = 0; y < 7; y++)
+                            {
+                                if (g[x, 6 - y])
+                                {
+                                    total += Convert.ToInt32(Math.Pow(2, y));
+                                }
+                            }
+
+                            sb.Append(total);
+                        }
+                        else
+                        {
+                            sb.Append("0");
+                        }
+
+                        if (x < 4)
+                        {
+                            sb.Append(",");
+                        }
+                    }
+
+                    sb.AppendLine("},");
+                }
+                else
+                {
+                    sb.AppendLine("{0,0,0,0,0},");
+                }
+            }
+
+            File.WriteAllText(sfd.FileName, sb.ToString());
         }
     }
 }
